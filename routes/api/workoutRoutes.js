@@ -4,13 +4,12 @@ const Workout = require('../../models/Workout');
 //this gets our last workout
 router.get('/', (req, res) => {
   console.log('workout rout hit**********');
-  Workout.find({})
-    .sort({ date: -1 })
-    .then((data) => {
-      res.json(data);
+  Workout.find()
+    .then((workoutDB) => {
+      res.json(workoutDB);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -19,22 +18,22 @@ router.get('/range', (req, res) => {
   Workout.find({})
     .limit(7)
     .sort({ date: -1 })
-    .then((data) => {
-      res.json(data);
+    .then((workoutDB) => {
+      res.json(workoutDB);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 
 router.post('/', ({ body }, res) => {
   console.log('****CREAT WORKOUT*****');
   Workout.create(body)
-    .then((data) => {
-      res.json(data);
+    .then((workoutDB) => {
+      res.json(workoutDB);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 
@@ -45,11 +44,11 @@ router.post('/:id', ({ body, params }, res) => {
     { $push: { exercises: body } },
     { new: true, runValidators: true }
   )
-    .then((data) => {
-      res.json(data);
+    .then((workoutDB) => {
+      res.json(workoutDB);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 

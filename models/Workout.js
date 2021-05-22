@@ -2,11 +2,10 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const exercises = {
+const exerciseData = {
   type: {
     type: String,
-    required: 'please choose cardio or resistance',
-    enum: ['cardio', 'resistance']
+    required: 'please choose cardio or resistance'
   },
   name: {
     type: String,
@@ -35,16 +34,16 @@ const WorkoutSchema = new Schema({
     type: Date,
     default: Date.now
   },
-  exercises: [exercises]
+  exercises: [exerciseData]
 });
 
-WorkoutSchema.methods.totalDuration = function () {
-  let totalDuration = 0;
-  this.exercises.forEach((exercise) => {
-    totalDuration += exercise.duration;
-  });
-  return totalDuration;
-};
+//this dynamically creates a property in the schema and then
+//accumulates value to the duration property
+WorkoutSchema.virtual('totalDuration').get(function () {
+  return this.exercises.reduce((acc, curr) => {
+    return acc + curr.duration;
+  }, 0);
+});
 
 const Workout = mongoose.model('Workout', WorkoutSchema);
 

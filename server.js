@@ -11,7 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(express.static('public'));
-app.use(require('./routes'));
+app.use(require('./routes/homeRoutes'));
+app.use(require('./routes/workoutRoutes'));
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/populatedb', {
   useNewUrlParser: true

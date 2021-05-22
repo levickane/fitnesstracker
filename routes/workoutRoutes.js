@@ -18,6 +18,7 @@ router.get('/api/workouts/range', (req, res) => {
     .limit(7)
     .sort({ date: -1 })
     .then((workoutDB) => {
+      console.log(workoutDB[0].exercises);
       res.json(workoutDB);
     })
     .catch((err) => {
@@ -26,13 +27,12 @@ router.get('/api/workouts/range', (req, res) => {
 });
 
 router.post('/api/workouts', ({ body }, res) => {
-  const workout = new Workout(body);
-  Workout.create(workout)
+  Workout.create({ body })
     .then((workoutDB) => {
       res.json(workoutDB);
     })
     .catch((err) => {
-      res.status(400).json(err);
+      res.status(500).json(err);
     });
 });
 

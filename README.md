@@ -4,6 +4,10 @@
 
 This application was built to track fitness workouts with a Mongo/Mongoose Database while handling routes with Express. Create a new workout and add exercises to the workout with the option of Cardio or Resistance. Track the data through Chart.js over the last 7 days. The applicaiton is deployed with Heroku and MongoAtlas.
 
+![homepage](./public/images/homepage.png)
+
+![statspage](./public/images/statspage.png)
+
 ## Table of Contents
 
 - [Installation](#Installation)
